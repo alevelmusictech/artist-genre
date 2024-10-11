@@ -1,0 +1,261 @@
+name,genre
+Louis Armstrong,Jazz
+Duke Ellington,Jazz
+Charlie Parker,Jazz
+Miles Davis,Jazz
+John Coltrane,Jazz
+Thelonious Monk,Jazz
+Dizzy Gillespie,Jazz
+Billie Holiday,Jazz
+Ella Fitzgerald,Jazz
+Charles Mingus,Jazz
+Dave Brubeck,Jazz
+Herbie Hancock,Jazz
+Art Blakey,Jazz
+Stan Getz,Jazz
+Chet Baker,Jazz
+Sarah Vaughan,Jazz
+Sonny Rollins,Jazz
+Count Basie,Jazz
+Ornette Coleman,Jazz
+Wynton Marsalis,Jazz
+Robert Johnson,Blues
+Muddy Waters,Blues
+B.B. King,Blues
+Howlin' Wolf,Blues
+John Lee Hooker,Blues
+Buddy Guy,Blues
+Albert King,Blues
+Freddie King,Blues
+Etta James,Blues
+T-Bone Walker,Blues
+Elmore James,Blues
+Lightnin' Hopkins,Blues
+Lead Belly,Blues
+Willie Dixon,Blues
+Big Mama Thornton,Blues
+Sonny Boy Williamson II,Blues
+Blind Lemon Jefferson,Blues
+Otis Rush,Blues
+Taj Mahal,Blues
+Eric Clapton,Blues
+Chuck Berry,Rock 'n' Roll
+Elvis Presley,Rock 'n' Roll
+Little Richard,Rock 'n' Roll
+Buddy Holly,Rock 'n' Roll
+Jerry Lee Lewis,Rock 'n' Roll
+Carl Perkins,Rock 'n' Roll
+Fats Domino,Rock 'n' Roll
+Bo Diddley,Rock 'n' Roll
+The Everly Brothers,Rock 'n' Roll
+Roy Orbison,Rock 'n' Roll
+Bill Haley & His Comets,Rock 'n' Roll
+Gene Vincent,Rock 'n' Roll
+Eddie Cochran,Rock 'n' Roll
+Ritchie Valens,Rock 'n' Roll
+The Crickets,Rock 'n' Roll
+Dion and the Belmonts,Rock 'n' Roll
+Link Wray,Rock 'n' Roll
+Johnny Cash,Rock 'n' Roll
+Sam Cooke,Rock 'n' Roll
+Wanda Jackson,Rock 'n' Roll
+The Beatles,Rock
+The Rolling Stones,Rock
+Led Zeppelin,Rock
+The Who,Rock
+Pink Floyd,Rock
+The Doors,Rock
+Jimi Hendrix,Rock
+The Kinks,Rock
+Cream,Rock
+The Byrds,Rock
+The Velvet Underground,Rock
+David Bowie,Rock
+Queen,Rock
+Black Sabbath,Rock
+Fleetwood Mac,Rock
+The Eagles,Rock
+The Clash,Rock
+Deep Purple,Rock
+Aerosmith,Rock
+U2,Rock
+Black Sabbath,Metal
+Led Zeppelin,Metal
+Judas Priest,Metal
+Iron Maiden,Metal
+Metallica,Metal
+Megadeth,Metal
+Slayer,Metal
+Anthrax,Metal
+Motörhead,Metal
+Pantera,Metal
+Black Label Society,Metal
+Slipknot,Metal
+Sepultura,Metal
+Dream Theater,Metal
+Tool,Metal
+System of a Down,Metal
+Alice in Chains,Metal
+Korn,Metal
+Avenged Sevenfold,Metal
+Lamb of God,Metal
+The Ramones,Punk
+The Sex Pistols,Punk
+The Clash,Punk
+The Dead Kennedys,Punk
+The Stooges,Punk
+Patti Smith,Punk
+The Buzzcocks,Punk
+The Damned,Punk
+Black Flag,Punk
+Bad Brains,Punk
+The Misfits,Punk
+The Germs,Punk
+Minor Threat,Punk
+The Exploited,Punk
+The Adverts,Punk
+The Slits,Punk
+Siouxsie and the Banshees,Punk
+X-Ray Spex,Punk
+Hüsker Dü,Punk
+The Descendents,Punk
+Ray Charles,Soul
+James Brown,Soul
+Aretha Franklin,Soul
+Marvin Gaye,Soul
+Otis Redding,Soul
+Sam Cooke,Soul
+Stevie Wonder,Soul
+Curtis Mayfield,Soul
+Al Green,Soul
+Smokey Robinson,Soul
+Diana Ross & The Supremes,Soul
+Gladys Knight & The Pips,Soul
+Isaac Hayes,Soul
+Donny Hathaway,Soul
+Etta James,Soul
+Sam & Dave,Soul
+Wilson Pickett,Soul
+Bobby Womack,Soul
+Bill Withers,Soul
+The Temptations,Soul
+James Brown,Disco/Funk
+Parliament-Funkadelic,Disco/Funk
+Sly and the Family Stone,Disco/Funk
+Chic,Disco/Funk
+Earth,Disco/Funk
+Kool & the Gang,Disco/Funk
+Donna Summer,Disco/Funk
+Bee Gees,Disco/Funk
+Gloria Gaynor,Disco/Funk
+Diana Ross,Disco/Funk
+The Jackson 5,Disco/Funk
+Rick James,Disco/Funk
+Stevie Wonder,Disco/Funk
+The Commodores,Disco/Funk
+George Clinton,Disco/Funk
+The Ohio Players,Disco/Funk
+Prince,Disco/Funk
+Curtis Mayfield,Disco/Funk
+The Isley Brothers,Disco/Funk
+Sister Sledge,Disco/Funk
+Bob Marley & The Wailers,Reggae
+Peter Tosh,Reggae
+Burning Spear,Reggae
+Toots and the Maytals,Reggae
+Jimmy Cliff,Reggae
+Desmond Dekker,Reggae
+Gregory Isaacs,Reggae
+"Lee ""Scratch"" Perry",Reggae
+Black Uhuru,Reggae
+Steel Pulse,Reggae
+Sly and Robbie,Reggae
+Augustus Pablo,Reggae
+Dennis Brown,Reggae
+Bunny Wailer,Reggae
+Third World,Reggae
+The Skatalites,Reggae
+The Heptones,Reggae
+The Ethiopians,Reggae
+Culture,Reggae
+Buju Banton,Reggae
+Bob Dylan,Acoustic/Folk
+Woody Guthrie,Acoustic/Folk
+Joan Baez,Acoustic/Folk
+Joni Mitchell,Acoustic/Folk
+Leonard Cohen,Acoustic/Folk
+Simon & Garfunkel,Acoustic/Folk
+Neil Young,Acoustic/Folk
+Nick Drake,Acoustic/Folk
+Pete Seeger,Acoustic/Folk
+John Denver,Acoustic/Folk
+James Taylor,Acoustic/Folk
+Cat Stevens,Acoustic/Folk
+The Kingston Trio,Acoustic/Folk
+Fairport Convention,Acoustic/Folk
+Gordon Lightfoot,Acoustic/Folk
+Jackson Browne,Acoustic/Folk
+Crosby,Acoustic/Folk
+Laura Marling,Acoustic/Folk
+Donovan,Acoustic/Folk
+The Mamas & The Papas,Acoustic/Folk
+Michael Jackson,Commercial Pop
+Madonna,Commercial Pop
+Prince,Commercial Pop
+Whitney Houston,Commercial Pop
+The Beatles,Commercial Pop
+ABBA,Commercial Pop
+Elton John,Commercial Pop
+Mariah Carey,Commercial Pop
+Beyoncé,Commercial Pop
+Justin Timberlake,Commercial Pop
+Taylor Swift,Commercial Pop
+Adele,Commercial Pop
+Celine Dion,Commercial Pop
+Britney Spears,Commercial Pop
+Backstreet Boys,Commercial Pop
+Lady Gaga,Commercial Pop
+Rihanna,Commercial Pop
+Ed Sheeran,Commercial Pop
+Katy Perry,Commercial Pop
+Ariana Grande,Commercial Pop
+Tupac Shakur,Urban
+The Notorious B.I.G.,Urban
+Jay-Z,Urban
+Nas,Urban
+Kanye West,Urban
+Dr. Dre,Urban
+Snoop Dogg,Urban
+Run-D.M.C.,Urban
+Ice Cube,Urban
+Public Enemy,Urban
+LL Cool J,Urban
+Kendrick Lamar,Urban
+J. Cole,Urban
+OutKast,Urban
+Missy Elliott,Urban
+A Tribe Called Quest,Urban
+Wu-Tang Clan,Urban
+Nicki Minaj,Urban
+Drake,Urban
+Cardi B,Urban
+Kraftwerk,Electronic
+Daft Punk,Electronic
+The Chemical Brothers,Electronic
+Aphex Twin,Electronic
+Moby,Electronic
+Underworld,Electronic
+Fatboy Slim,Electronic
+Massive Attack,Electronic
+The Prodigy,Electronic
+Depeche Mode,Electronic
+Orbital,Electronic
+Deadmau5,Electronic
+Skrillex,Electronic
+Boards of Canada,Electronic
+Justice,Electronic
+Tiesto,Electronic
+Carl Cox,Electronic
+Richie Hawtin,Electronic
+Calvin Harris,Electronic
+Armin van Buuren,Electronic
