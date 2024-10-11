@@ -1,6 +1,7 @@
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #8585c9; /* Change the overall background color of the page */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,43 +10,81 @@ body {
 }
 
 #game-container {
-    background: white;
-    border: 1px solid #ccc;
+    background-color: #f7f9fc; /* Change the background color of the game container */
+    border: 2px solid #d1d9e6; /* Subtle border for the container */
     padding: 20px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px; /* Ensure it doesn't stretch too much */
 }
 
+/* Game Title Styling */
+h1 {
+    font-size: 24px; /* Reduce the size of the game title */
+    color: #444444;
+    margin-bottom: 10px;
+}
+
+/* Artist Name Styling */
+#artist-name {
+    font-size: 30px; /* Increase the font size for clarity */
+    font-weight: bold;
+    color: #032241; /* Change to a darker color for better visibility */
+    margin-bottom: 20px;
+}
+
+/* Genre Button Styling */
 #genre-buttons button {
     margin: 10px;
-    padding: 10px;
+    padding: 15px 20px;
+    font-size: 16px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #3498db; /* Change button color */
     color: white;
     border: none;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 #genre-buttons button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9; /* Darker shade on hover */
 }
 
+/* Result Display Styling */
 #result {
     margin-top: 20px;
     font-size: 18px;
+    color: #333;
 }
 
-#next-artist {
+/* Score and Timer Styling */
+#score, #timer {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #8e44ad; /* Different color to make them stand out */
+}
+
+/* Next and Restart Buttons Styling */
+#next-artist, #restart-game {
     margin-top: 20px;
-    padding: 10px;
-    background-color: #28a745;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #27ae60;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
-#next-artist:hover {
-    background-color: #218838;
+#next-artist:hover, #restart-game:hover {
+    background-color: #1f8a4d; /* Darker shade on hover */
+}
+
+/* Additional Styling for Layout */
+#game-container > * {
+    margin-bottom: 15px; /* Add spacing between elements */
 }
