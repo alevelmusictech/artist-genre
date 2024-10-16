@@ -1,13 +1,18 @@
 // Function to load and parse the CSV file
 async function loadArtistsFromCSV() {
-    const response = await fetch('name,genre.csv');
-    const data = await response.text();
-    const lines = data.split('\n');
-    const artists = lines.slice(1).map(line => {
-        const [name, genre] = line.split(',');
-        return { name: name.trim(), genre: genre.trim() };
-    });
-    return artists;
+    try {
+        const response = await fetch('name,genre.csv'); // Corrected file name
+        const data = await response.text();
+        const lines = data.split('\n');
+        const artists = lines.slice(1).map(line => {
+            const [name, genre] = line.split(',');
+            return { name: name.trim(), genre: genre.trim() };
+        });
+        return artists;
+    } catch (error) {
+        console.error('Error loading CSV:', error);
+        return [];
+    }
 }
 
 const genres = ["Jazz", "Blues", "Rock 'n' Roll", "Rock", "Metal", "Punk", "Soul", "Disco/Funk", "Reggae", "Acoustic/Folk", "Commercial Pop", "Urban", "Electronic"];
@@ -25,6 +30,10 @@ function getRandomArtist() {
 
 // Function to display the artist and genres
 function displayArtistAndGenres() {
+    if (artists.length === 0) {
+        console.error('No artists available to display.');
+        return;
+    }
     currentArtist = getRandomArtist();
     document.getElementById("artist-name").innerText = `Artist: ${currentArtist.name}`;
     const genreButtonsContainer = document.getElementById("genre-buttons");
@@ -32,73 +41,66 @@ function displayArtistAndGenres() {
 
     genres.forEach(genre => {
         const button = document.createElement("button");
+        button.className = 'genre-button';
         button.innerText = genre;
-        button.onclick = () => checkGenre(genre);
+        button.onclick = () => {
+            if (genre === currentArtist.genre) {
+                handleCorrectAnswer();
+            } else {
+                handleIncorrectAnswer();
+            }
+        };
         genreButtonsContainer.appendChild(button);
     });
 }
 
-// Function to check if the selected genre is correct
-function checkGenre(selectedGenre) {
-    const resultElement = document.getElementById("result");
-    if (selectedGenre === currentArtist.genre) {
-        resultElement.innerText = "Correct!";
-        score++;
-        document.getElementById("score").innerText = `Score: ${score}`;
-        setTimeout(() => {
-            resultElement.innerText = '';
-            displayArtistAndGenres();
-        }, 1000); // Move to the next artist after 1 second
-    } else {
-        resultElement.innerText = `Wrong! The correct genre is ${currentArtist.genre}.`;
-    }
-}
+// Function to handle correct answers
+function handleCorrectAnswer() {
+    score++;
+    updateScoreDisplay();
 
-// Function to start the countdown timer
-function startTimer() {
-    timer = setInterval(() => {
-        if (timeRemaining > 0) {
-            timeRemaining--;
-            updateTimerDisplay();
-        } else {
-            endGame(); // End the game when time is up
-        }
+    disableGenreButtons();
+
+    setTimeout(() => {
+        displayArtistAndGenres();
+        enableGenreButtons();
     }, 1000);
 }
 
-// Function to update the timer display
-function updateTimerDisplay() {
-    const minutes = Math.floor(timeRemaining / 60);
-    const seconds = timeRemaining % 60;
-    document.getElementById("timer").innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+// Function to handle incorrect answers
+function handleIncorrectAnswer() {
+    // Handle incorrect answer logic
 }
 
-// Function to end the game when the timer reaches zero
-function endGame() {
-    clearInterval(timer);
-    document.getElementById("result").innerText = "Time's up! Game over.";
-    disableGenreButtons();
+// Function to update the score display
+function updateScoreDisplay() {
+    document.getElementById('score').innerText = `Score: ${score}`;
 }
 
-// Function to disable genre buttons when the game ends
+// Function to disable all genre buttons
 function disableGenreButtons() {
-    const buttons = document.querySelectorAll("#genre-buttons button");
+    const buttons = document.querySelectorAll('.genre-button');
     buttons.forEach(button => {
         button.disabled = true;
+    });
+}
+
+// Function to enable all genre buttons
+function enableGenreButtons() {
+    const buttons = document.querySelectorAll('.genre-button');
+    buttons.forEach(button => {
+        button.disabled = false;
     });
 }
 
 // Function to start a new game
 function startNewGame() {
     score = 0;
-    timeRemaining = 180; // Reset timer to 3 minutes
-    document.getElementById("score").innerText = `Score: ${score}`;
-    document.getElementById("result").innerText = '';
-    startTimer(); // Start the timer
-    displayArtistAndGenres(); // Show the first artist and buttons
-    // Show buttons
-    document.getElementById("next-artist").style.display = "inline";
-    document.getElementById("restart-game").style.display = "inline";
+    updateScoreDisplay();
+    displayArtistAndGenres();
+    timer = setInterval(() => {
+        // Timer logic
+    }, 1000);
 }
 
 // Event listener for the Next Artist button
@@ -115,14 +117,18 @@ document.getElementById("restart-game").onclick = () => {
 
 // Event listener for the Start Game button
 document.getElementById("start-game").onclick = async () => {
+    console.log('Start Game button clicked');
     document.getElementById("start-game").style.display = "none"; // Hide Start button after game starts
     artists = await loadArtistsFromCSV(); // Load artists before starting the game
+    console.log('Artists loaded:', artists);
     startNewGame();
 };
 
 // Call the initGame function to start the game
 async function initGame() {
+    console.log('Initializing game');
     artists = await loadArtistsFromCSV(); // Load artists when initializing the game
+    console.log('Artists loaded during init:', artists);
 }
 
 initGame();
