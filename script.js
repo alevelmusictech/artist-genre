@@ -1,13 +1,13 @@
 // Function to load and parse the CSV file
 async function loadArtistsFromCSV() {
-  const response = await fetch('name,genre.csv');
-  const data = await response.text();
-  const lines = data.split('\n');
-  const artists = lines.slice(1).map(line => {
-      const [name, genre] = line.split(',');
-      return { name: name.trim(), genre: genre.trim() };
-  });
-  return artists;
+    const response = await fetch('name,genre.csv');
+    const data = await response.text();
+    const lines = data.split('\n');
+    const artists = lines.slice(1).map(line => {
+        const [name, genre] = line.split(',');
+        return { name: name.trim(), genre: genre.trim() };
+    });
+    return artists;
 }
 
 const genres = ["Jazz", "Blues", "Rock 'n' Roll", "Rock", "Metal", "Punk", "Soul", "Disco/Funk", "Reggae", "Acoustic/Folk", "Commercial Pop", "Urban", "Electronic"];
@@ -15,6 +15,7 @@ let currentArtist = {};
 let score = 0;
 let timer; // Declare a variable to hold the timer
 let timeRemaining = 180; // Set the initial time (3 minutes in seconds)
+let artists = []; // Declare a global artists variable
 
 // Function to select a random artist
 function getRandomArtist() {
@@ -43,10 +44,14 @@ function checkGenre(selectedGenre) {
     if (selectedGenre === currentArtist.genre) {
         resultElement.innerText = "Correct!";
         score++;
+        document.getElementById("score").innerText = `Score: ${score}`;
+        setTimeout(() => {
+            resultElement.innerText = '';
+            displayArtistAndGenres();
+        }, 1000); // Move to the next artist after 1 second
     } else {
         resultElement.innerText = `Wrong! The correct genre is ${currentArtist.genre}.`;
     }
-    document.getElementById("score").innerText = `Score: ${score}`;
 }
 
 // Function to start the countdown timer
@@ -109,7 +114,15 @@ document.getElementById("restart-game").onclick = () => {
 };
 
 // Event listener for the Start Game button
-document.getElementById("start-game").onclick = () => {
+document.getElementById("start-game").onclick = async () => {
     document.getElementById("start-game").style.display = "none"; // Hide Start button after game starts
+    artists = await loadArtistsFromCSV(); // Load artists before starting the game
     startNewGame();
 };
+
+// Call the initGame function to start the game
+async function initGame() {
+    artists = await loadArtistsFromCSV(); // Load artists when initializing the game
+}
+
+initGame();
