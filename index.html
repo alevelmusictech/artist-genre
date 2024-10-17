@@ -6,10 +6,18 @@
     <title>Artist and Genre</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+
+
+
 <body>
     <script>
         console.log("Inline script is running");
     </script>
+    <audio id="correct-sound" src="sounds/correct.wav" preload="auto"></audio>
+    <audio id="incorrect-sound" src="sounds/incorrect.wav" preload="auto"></audio>
+    
+
     <div id="game-container">
         <h1>Match the artist with the genre they are most likely to be associated with:</h1>
         <button id="start-game">Start Game</button>
@@ -19,8 +27,8 @@
         </div>
         <div id="result"></div>
         <div id="score">Score: 0</div>
-        <button id="next-artist" style="display: none;">Next Artist</button>
-        <button id="restart-game" style="display: none;">Restart Game</button>
+        <div id="timer">Time Remaining: 60</div>
+        
     </div>
 
     <script src="script.js"></script>

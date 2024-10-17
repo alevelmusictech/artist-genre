@@ -1,6 +1,5 @@
 console.log("JavaScript file is running");
 
-
 const genres = [
     "Jazz", 
     "Blues", 
@@ -19,79 +18,169 @@ const genres = [
 
 let currentArtist = {};
 let score = 0;
-let artists = []; // This will be populated from the JSON
+let artists = [];
+let timeRemaining = 60;
+let timerInterval; 
+
+// Function to start the countdown timer
+function startTimer() {
+    const timerElement = document.getElementById('timer');
+    timerElement.innerText = `Time Remaining: ${timeRemaining}`; 
+
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        timerElement.innerText = `Time Remaining: ${timeRemaining}`;
+        console.log(`Time Remaining: ${timeRemaining}`);
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval); 
+            endGame(); 
+        }
+    }, 1000); 
+}
+
+// Function to end the game when the timer reaches zero
+function endGame() {
+    alert("Time's up! Game over.");
+    disableGenreButtons();
+    document.getElementById('start-game').style.display = 'block';  
+}
 
 // Load artist-genre data from JSON
 async function loadArtistsFromJSON() {
     try {
-        const response = await fetch('name,genre.json'); // Path to JSON
+        const response = await fetch('name,genre.json'); 
         artists = await response.json();
-        console.log("Artists loaded:", artists);  // Check if artists are loaded correctly
+        console.log("Artists loaded:", artists); 
     } catch (error) {
         console.error('Error loading JSON:', error);
     }
 }
 
-// Get a random artist
+// Function to select a random artist
 function getRandomArtist() {
     const randomIndex = Math.floor(Math.random() * artists.length);
     return artists[randomIndex];
 }
 
-// Display artist and genre buttons
+// Function to display the artist and genres
 function displayArtistAndGenres() {
+    if (artists.length === 0) {
+        console.error('No artists available to display.');
+        return;
+    }
     currentArtist = getRandomArtist();
-    document.getElementById('artist-name').innerText = `Artist: ${currentArtist.name}`;
-    const genreButtonsContainer = document.getElementById('genre-buttons');
-    genreButtonsContainer.innerHTML = ''; // Clear previous buttons
+    document.getElementById("artist-name").innerText = `Artist: ${currentArtist.name}`;
+    const genreButtonsContainer = document.getElementById("genre-buttons");
+    genreButtonsContainer.innerHTML = ''; 
 
-    // Log the artist being displayed
-    console.log("Displaying artist:", currentArtist.name, "with genre:", currentArtist.genre);
-
-    // Create genre buttons
     genres.forEach(genre => {
-        console.log("Creating button for genre:", genre);  // Log each genre to ensure it's iterating correctly
-
-        const button = document.createElement('button');
+        const button = document.createElement("button");
+        button.className = 'genre-button';
         button.innerText = genre;
-
-        button.style.margin = '5px';  // Ensure proper spacing between buttons
-        button.style.padding = '10px';  // Optional: improve button styling
-
-        // On button click, compare genres
         button.onclick = () => {
-            const selectedGenre = genre.trim().toLowerCase();
-            const artistGenre = currentArtist.genre.trim().toLowerCase();
-
-            if (selectedGenre === artistGenre) {
-                console.log("Correct! Selected genre:", selectedGenre);
+            if (genre === currentArtist.genre) {
                 handleCorrectAnswer();
             } else {
-                console.log("Incorrect. Selected genre:", selectedGenre, "Artist genre:", artistGenre);
                 handleIncorrectAnswer();
             }
         };
-
-        // Append button and log its creation
         genreButtonsContainer.appendChild(button);
-        console.log("Button appended for genre:", genre);
+    });
+}
+// Function to play sound
+function playSound(soundId) {
+    const sound = document.getElementById(soundId);
+    if (sound) {
+        sound.play();
+    } else {
+        console.error(`Sound with id ${soundId} not found.`);
+    }
+}   
+
+
+// Function to handle correct answers
+function handleCorrectAnswer() {
+    const resultElement = document.getElementById('result');
+    resultElement.innerText = 'Correct!'; 
+    resultElement.style.backgroundColor = 'green';  
+    resultElement.style.color = 'white';  
+    resultElement.style.visibility = 'visible';  
+    resultElement.style.opacity = '1';  
+
+    score++;  
+    document.getElementById('score').innerText = `Score: ${score}`;  
+    
+    playSound('correct-sound');
+    disableGenreButtons();
+    
+
+    setTimeout(() => {
+        resultElement.style.opacity = '0';  
+        resultElement.style.visibility = 'hidden';  
+        resultElement.style.backgroundColor = '';  
+        displayArtistAndGenres();  
+        enableGenreButtons();
+    }, 2000); 
+}
+
+// Function to handle incorrect answers
+function handleIncorrectAnswer() {
+    const resultElement = document.getElementById('result');
+    resultElement.innerHTML = `Incorrect!<br>The correct answer was ${currentArtist.genre}.`; 
+    resultElement.style.backgroundColor = 'red';  
+    resultElement.style.color = 'white';  
+    resultElement.style.visibility = 'visible';  
+    resultElement.style.opacity = '1';  
+
+    playSound('incorrect-sound');
+    disableGenreButtons();
+
+    setTimeout(() => {
+        resultElement.style.opacity = '0';  
+        resultElement.style.visibility = 'hidden';  
+        resultElement.style.backgroundColor = '';  
+        displayArtistAndGenres();  
+        enableGenreButtons();
+    }, 2000); 
+}
+
+// Function to update the score display
+function updateScoreDisplay() {
+    document.getElementById('score').innerText = `Score: ${score}`;
+}
+
+// Function to disable all genre buttons
+function disableGenreButtons() {
+    const buttons = document.querySelectorAll('.genre-button');
+    buttons.forEach(button => {
+        button.disabled = true;
     });
 }
 
-// Handle correct answer
-function handleCorrectAnswer() {
-    score++;
-    document.getElementById('score').innerText = `Score: ${score}`;
-    displayArtistAndGenres();
+// Function to enable all genre buttons
+function enableGenreButtons() {
+    const buttons = document.querySelectorAll('.genre-button');
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
 }
 
-// Handle incorrect answer
-function handleIncorrectAnswer() {
-    displayArtistAndGenres();
-}
+// Ensure elements exist and start game on click
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById("start-game");
 
-// Start game
-document.getElementById('start-game').onclick = async () => {
-    await loadArtistsFromJSON();  // Load artists from JSON
-    displayArtistAndGenres();
-};
+    if (startButton) {
+        startButton.onclick = async () => {
+            console.log('Start Game button clicked');
+            startButton.style.display = "none"; 
+            timeRemaining = 60; 
+            startTimer(); 
+
+            await loadArtistsFromJSON();  
+            displayArtistAndGenres();  
+        };
+    } else {
+        console.error('Start button not found');
+    }
+});

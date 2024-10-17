@@ -20,6 +20,26 @@ body {
     max-width: 800px; /* Ensure it doesn't stretch too much */
 }
 
+
+#result {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #f8f8f8;  /* Default background color */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    min-height: 50px;
+    line-height: normal;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease, background-color 0.5s ease;  /* Smooth transition for background color */
+}
+
+
 /* Game Title Styling */
 h1 {
     font-size: 24px; /* Reduce the size of the game title */
@@ -60,10 +80,17 @@ h1 {
 }
 
 /* Score and Timer Styling */
-#score, #timer {
+#score{
     margin-top: 15px;
     font-size: 20px;
     color: #8e44ad; /* Different color to make them stand out */
+}
+
+#timer {
+    font-size: 20px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Next and Restart Buttons Styling */
@@ -88,3 +115,5 @@ h1 {
 #game-container > * {
     margin-bottom: 15px; /* Add spacing between elements */
 }
+
+
