@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Message for small screens -->
+    <div id="screen-warning" style="display:none; text-align: center;">
+        <h1>This game is not playable on small screens.</h1>
+        <p>Please switch to a larger screen to play the game.</p>
+    </div>
+
+    <!-- Main game container -->
     <div id="game-container">
         <h1>Match the artist with the genre they are most likely to be associated with:</h1>
         <button id="start-game">Start Game</button>
@@ -19,5 +27,6 @@
 
     <!-- Include the refactored scripts -->
     <script type="module" src="game.js"></script>
+    <script src="screenCheck.js"></script>
 </body>
 </html>
