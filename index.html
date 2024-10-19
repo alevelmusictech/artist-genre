@@ -3,34 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist and Genre</title>
+    <title>Artist and Genre Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
-
-
-
 <body>
-    <script>
-        console.log("Inline script is running");
-    </script>
-    <audio id="correct-sound" src="sounds/correct.wav" preload="auto"></audio>
-    <audio id="incorrect-sound" src="sounds/incorrect.wav" preload="auto"></audio>
-    
-
     <div id="game-container">
         <h1>Match the artist with the genre they are most likely to be associated with:</h1>
         <button id="start-game">Start Game</button>
         <div id="artist-name">Artist: </div>
-        <div id="genre-buttons">
-            <!-- Genre buttons will be added dynamically by script.js -->
-        </div>
+        <div id="genre-buttons"></div>
         <div id="result"></div>
         <div id="score">Score: 0</div>
         <div id="timer">Time Remaining: 60</div>
-        
     </div>
 
-    <script src="script.js"></script>
+    <!-- Include the refactored scripts -->
+    <script type="module" src="game.js"></script>
 </body>
 </html>
