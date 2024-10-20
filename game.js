@@ -34,11 +34,20 @@ function endGame() {
     document.getElementById('start-game').style.display = 'block';
 }
 
+// Utility to play sound effects
+function playSound(soundId) {
+    const sound = document.getElementById(soundId);
+    if (sound) {
+        sound.play();
+    }
+}
+
 // Export the necessary functions so they can be used in ui.js
 export function handleCorrectAnswer() {
     score++;
     updateScore(score);
     showResult('Correct!', 'green');
+    playSound('correct-sound');  // Play correct answer sound
     setTimeout(() => {
         clearResult();
         displayNextArtist();
@@ -47,6 +56,7 @@ export function handleCorrectAnswer() {
 
 export function handleIncorrectAnswer() {
     showResult(`Incorrect! The correct genre was ${currentArtist.genre}.`, 'red');
+    playSound('incorrect-sound');  // Play incorrect answer sound
     setTimeout(() => {
         clearResult();
         displayNextArtist();
