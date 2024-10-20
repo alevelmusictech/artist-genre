@@ -1,13 +1,15 @@
-// game.js
-
 import { loadArtists } from './data.js';
-import { displayArtistAndGenres, updateScore, showResult, clearResult } from './ui.js';
+import { displayArtistAndGenres, updateScore, showResult, clearResult } from './ui.js';  
 
 let currentArtist = {};
 let score = 0;
 let timeRemaining = 60;
 let timerInterval;
 let artists = [];
+const genres = [
+    "Jazz", "Blues", "Rock 'n' Roll", "Rock", "Metal", "Punk", "Soul", "Disco/Funk",
+    "Reggae", "Acoustic/Folk", "Commercial Pop", "Urban", "Electronic"
+];
 
 // Start the countdown timer
 function startTimer() {
@@ -32,26 +34,35 @@ function endGame() {
     document.getElementById('start-game').style.display = 'block';
 }
 
-// Handle correct answer
-function handleCorrectAnswer() {
+// Export the necessary functions so they can be used in ui.js
+export function handleCorrectAnswer() {
     score++;
     updateScore(score);
     showResult('Correct!', 'green');
-    playSound('correct-sound');
     setTimeout(() => {
         clearResult();
-        displayArtistAndGenres(currentArtist, genres);
+        displayNextArtist();
     }, 2000);
 }
 
-// Handle incorrect answer
-function handleIncorrectAnswer() {
+export function handleIncorrectAnswer() {
     showResult(`Incorrect! The correct genre was ${currentArtist.genre}.`, 'red');
-    playSound('incorrect-sound');
     setTimeout(() => {
         clearResult();
-        displayArtistAndGenres(currentArtist, genres);
+        displayNextArtist();
     }, 2000);
+}
+
+// Display the next artist and generate buttons
+function displayNextArtist() {
+    if (artists.length > 0) {
+        currentArtist = getRandomArtist();
+        console.log("Displaying artist: ", currentArtist);
+        displayArtistAndGenres(currentArtist, genres);
+        enableGenreButtons();
+    } else {
+        console.error("No artists available to display.");
+    }
 }
 
 // Start the game
@@ -59,15 +70,28 @@ export async function startGame() {
     timeRemaining = 60;
     score = 0;
     updateScore(score);
+
+    // Hide the start button
+    document.getElementById("start-game").style.display = 'none';
+
+    // Start the countdown timer
     startTimer();
 
     // Load artist data and start the game
-    artists = await loadArtists();
-    currentArtist = getRandomArtist();
-    displayArtistAndGenres(currentArtist, genres);
+    try {
+        artists = await loadArtists();
+        console.log("Artists loaded: ", artists);  // Log loaded artists
+        if (artists.length > 0) {
+            displayNextArtist();
+        } else {
+            console.error('No artist data loaded.');
+        }
+    } catch (error) {
+        console.error('Error loading artists:', error);
+    }
 }
 
-// Get a random artist from the list
+// Get a random artist from the loaded list
 function getRandomArtist() {
     const randomIndex = Math.floor(Math.random() * artists.length);
     return artists[randomIndex];

@@ -1,5 +1,8 @@
 // ui.js
 
+// Import the functions from game.js
+import { handleCorrectAnswer, handleIncorrectAnswer } from './game.js';
+
 // Update the displayed artist and generate buttons for genres
 export function displayArtistAndGenres(artist, genres) {
     document.getElementById("artist-name").innerText = `Artist: ${artist.name}`;
@@ -10,6 +13,7 @@ export function displayArtistAndGenres(artist, genres) {
         const button = createGenreButton(genre, artist);
         genreButtonsContainer.appendChild(button);
     });
+    console.log("Buttons created for genres:", genres);  // Log button creation
 }
 
 // Create a genre button with event handling
@@ -19,9 +23,9 @@ function createGenreButton(genre, artist) {
     button.innerText = genre;
     button.onclick = () => {
         if (genre === artist.genre) {
-            handleCorrectAnswer();
+            handleCorrectAnswer();  // Now it works correctly
         } else {
-            handleIncorrectAnswer();
+            handleIncorrectAnswer();  // Now it works correctly
         }
     };
     return button;
