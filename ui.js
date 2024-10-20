@@ -1,6 +1,6 @@
 // ui.js
 
-// Import the functions from game.js
+// Import the necessary functions from game.js
 import { handleCorrectAnswer, handleIncorrectAnswer } from './game.js';
 
 // Update the displayed artist and generate buttons for genres
@@ -13,10 +13,9 @@ export function displayArtistAndGenres(artist, genres) {
         const button = createGenreButton(genre, artist);
         genreButtonsContainer.appendChild(button);
     });
-    console.log("Buttons created for genres:", genres);  // Log button creation
 }
 
-// Create a genre button with event handling
+// Create a genre button with event handling and visual feedback
 function createGenreButton(genre, artist) {
     const button = document.createElement("button");
     button.className = 'genre-button';
@@ -24,9 +23,16 @@ function createGenreButton(genre, artist) {
     button.onclick = () => {
         if (genre === artist.genre) {
             handleCorrectAnswer();  // Handle correct answer
+            button.classList.add('correct-glow');  // Add glow effect to correct button
         } else {
             handleIncorrectAnswer();  // Handle incorrect answer
+            button.classList.add('shake');  // Add shake effect to incorrect button
         }
+
+        // Remove the visual effect after a short delay
+        setTimeout(() => {
+            button.classList.remove('correct-glow', 'shake');
+        }, 1000);  // 1 second delay to remove the effect
     };
     return button;
 }
@@ -47,10 +53,8 @@ export function showResult(message, isCorrect) {
     // Add the appropriate class depending on whether the answer is correct or incorrect
     if (isCorrect) {
         resultElement.classList.add('correct-result');
-        console.log('Correct result class added');
     } else {
         resultElement.classList.add('incorrect-result');
-        console.log('Incorrect result class added');
     }
 
     resultElement.style.visibility = 'visible';
