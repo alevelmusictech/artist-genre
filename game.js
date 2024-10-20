@@ -52,9 +52,7 @@ function enableGenreButtons() {
     document.querySelectorAll('.genre-button').forEach(button => button.disabled = false);
 }
 
-// Export the necessary functions so they can be used in ui.js
 // Correct answer handling
-
 export function handleCorrectAnswer() {
     disableGenreButtons();  // Disable buttons immediately after an answer is selected
     score++;
@@ -78,7 +76,6 @@ export function handleIncorrectAnswer() {
     }, 2000);
 }
 
-
 // Display the next artist and generate buttons
 function displayNextArtist() {
     if (artists.length > 0) {
@@ -90,15 +87,18 @@ function displayNextArtist() {
         console.error("No artists available to display.");
     }
 }
+// starting game
 
-// Start the game
 export async function startGame() {
+    console.log("Start Game clicked!");
+
+    // Hide the start button and the splash screen
+    document.getElementById("start-game").style.display = 'none';
+    document.getElementById("splash-screen").style.display = 'none';  // Hides the splash screen
+
     timeRemaining = 60;
     score = 0;
     updateScore(score);
-
-    // Hide the start button
-    document.getElementById("start-game").style.display = 'none';
 
     // Start the countdown timer
     startTimer();
@@ -108,6 +108,7 @@ export async function startGame() {
         artists = await loadArtists();
         console.log("Artists loaded: ", artists);  // Log loaded artists
         if (artists.length > 0) {
+            console.log("Displaying the first artist");
             displayNextArtist();
         } else {
             console.error('No artist data loaded.');
@@ -117,10 +118,23 @@ export async function startGame() {
     }
 }
 
+
+
 // Get a random artist from the loaded list
 function getRandomArtist() {
     const randomIndex = Math.floor(Math.random() * artists.length);
     return artists[randomIndex];
 }
 
-document.getElementById("start-game").onclick = startGame;
+// Ensure DOM is loaded before attaching event listener
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById("start-game");
+    
+    // Debugging logs to check if the button is found
+    if (startButton) {
+        console.log("Start Game button found, attaching event listener...");
+        startButton.onclick = startGame;  // Attach event listener
+    } else {
+        console.error("Start Game button not found!");
+    }
+});
