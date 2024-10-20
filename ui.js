@@ -23,9 +23,9 @@ function createGenreButton(genre, artist) {
     button.innerText = genre;
     button.onclick = () => {
         if (genre === artist.genre) {
-            handleCorrectAnswer();  // Now it works correctly
+            handleCorrectAnswer();  // Handle correct answer
         } else {
-            handleIncorrectAnswer();  // Now it works correctly
+            handleIncorrectAnswer();  // Handle incorrect answer
         }
     };
     return button;
@@ -36,18 +36,31 @@ export function updateScore(score) {
     document.getElementById('score').innerText = `Score: ${score}`;
 }
 
-// Show result message (correct/incorrect)
-export function showResult(message, color) {
+// Show result message and add the appropriate class (correct/incorrect)
+export function showResult(message, isCorrect) {
     const resultElement = document.getElementById('result');
     resultElement.innerHTML = message;
-    resultElement.style.backgroundColor = color;
+    
+    // Remove both classes to reset the result box
+    resultElement.classList.remove('correct-result', 'incorrect-result');
+    
+    // Add the appropriate class depending on whether the answer is correct or incorrect
+    if (isCorrect) {
+        resultElement.classList.add('correct-result');
+        console.log('Correct result class added');
+    } else {
+        resultElement.classList.add('incorrect-result');
+        console.log('Incorrect result class added');
+    }
+
     resultElement.style.visibility = 'visible';
     resultElement.style.opacity = '1';
 }
 
-// Clear result message
+// Clear result message and remove the result classes
 export function clearResult() {
     const resultElement = document.getElementById('result');
     resultElement.style.opacity = '0';
     resultElement.style.visibility = 'hidden';
+    resultElement.classList.remove('correct-result', 'incorrect-result');  // Reset the result classes
 }

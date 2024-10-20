@@ -42,11 +42,24 @@ function playSound(soundId) {
     }
 }
 
+// Disable all genre buttons after a selection is made
+function disableGenreButtons() {
+    document.querySelectorAll('.genre-button').forEach(button => button.disabled = true);
+}
+
+// Re-enable all genre buttons for the next round
+function enableGenreButtons() {
+    document.querySelectorAll('.genre-button').forEach(button => button.disabled = false);
+}
+
 // Export the necessary functions so they can be used in ui.js
+// Correct answer handling
+
 export function handleCorrectAnswer() {
+    disableGenreButtons();  // Disable buttons immediately after an answer is selected
     score++;
     updateScore(score);
-    showResult('Correct!', 'green');
+    showResult('Correct!', true);  // Pass true for correct answers
     playSound('correct-sound');  // Play correct answer sound
     setTimeout(() => {
         clearResult();
@@ -54,8 +67,10 @@ export function handleCorrectAnswer() {
     }, 2000);
 }
 
+// Incorrect answer handling
 export function handleIncorrectAnswer() {
-    showResult(`Incorrect! The correct genre was ${currentArtist.genre}.`, 'red');
+    disableGenreButtons();  // Disable buttons immediately after an answer is selected
+    showResult(`Incorrect! The correct genre was ${currentArtist.genre}.`, false);  // Pass false for incorrect answers
     playSound('incorrect-sound');  // Play incorrect answer sound
     setTimeout(() => {
         clearResult();
@@ -63,13 +78,14 @@ export function handleIncorrectAnswer() {
     }, 2000);
 }
 
+
 // Display the next artist and generate buttons
 function displayNextArtist() {
     if (artists.length > 0) {
         currentArtist = getRandomArtist();
         console.log("Displaying artist: ", currentArtist);
         displayArtistAndGenres(currentArtist, genres);
-        enableGenreButtons();
+        enableGenreButtons();  // Re-enable buttons for the new round
     } else {
         console.error("No artists available to display.");
     }
@@ -105,16 +121,6 @@ export async function startGame() {
 function getRandomArtist() {
     const randomIndex = Math.floor(Math.random() * artists.length);
     return artists[randomIndex];
-}
-
-// Utility to disable buttons
-function disableGenreButtons() {
-    document.querySelectorAll('.genre-button').forEach(button => button.disabled = true);
-}
-
-// Utility to enable buttons
-function enableGenreButtons() {
-    document.querySelectorAll('.genre-button').forEach(button => button.disabled = false);
 }
 
 document.getElementById("start-game").onclick = startGame;
