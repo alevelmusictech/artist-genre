@@ -27,12 +27,23 @@ function startTimer() {
     }, 1000);
 }
 
-// End the game when time runs out
 function endGame() {
-    alert("Time's up! Game over.");
-    disableGenreButtons();
-    document.getElementById('start-game').style.display = 'block';
+    // Hide game container and show game over splash screen
+    document.getElementById("game-container").style.display = 'none';
+    
+    // Update splash screen for Game Over
+    document.getElementById("splash-header").innerText = "Game Over!";
+    document.getElementById("splash-instructions").style.display = 'none';  // Hide instructions
+    document.getElementById("game-over-score").style.display = 'block';  // Show the score section
+    document.getElementById("final-score").innerText = score;  // Display the final score
+    
+    // Change the button to "Play Again"
+    document.getElementById("start-game").innerText = "Play Again";
+    
+    // Show the splash screen again for the game over
+    document.getElementById("splash-screen").style.display = 'flex';
 }
+
 
 // Utility to play sound effects
 function playSound(soundId) {
@@ -92,10 +103,18 @@ function displayNextArtist() {
 export async function startGame() {
     console.log("Start Game clicked!");
 
-    // Hide the start button and the splash screen
-    document.getElementById("start-game").style.display = 'none';
-    document.getElementById("splash-screen").style.display = 'none';  // Hides the splash screen
+    // Hide the splash screen
+    document.getElementById("splash-screen").style.display = 'none';
 
+    // Reset splash screen elements for the next game
+    document.getElementById("splash-header").innerText = "Welcome to the Artist & Genre Matching Game!";
+    document.getElementById("splash-instructions").style.display = 'block';  // Show instructions again
+    document.getElementById("game-over-score").style.display = 'none';  // Hide the game over score
+
+    // Show game container
+    document.getElementById("game-container").style.display = 'block';
+
+    // Reset game state
     timeRemaining = 60;
     score = 0;
     updateScore(score);
@@ -117,7 +136,6 @@ export async function startGame() {
         console.error('Error loading artists:', error);
     }
 }
-
 
 
 // Get a random artist from the loaded list
