@@ -1,5 +1,7 @@
 /* Global Styles */
 
+
+
 /* "not playable" message */
 #screen-warning {
     position: fixed;
@@ -17,6 +19,32 @@
     font-size: 24px; /* Make the text larger */
     padding: 20px;
 }
+
+/* Video Background Styling */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;  /* Make sure it's behind all other elements */
+    object-fit: cover;  /* Ensure it covers the entire screen */
+    opacity: 0.5;  /* Adjust opacity for ambient effect */
+}
+
+/* Ensure the game container elements are still visible */
+body, #game-container, #splash-screen {
+    position: relative;
+    z-index: 1;  /* Keep the game elements above the video */
+}
+
+/* Add more contrast if needed to keep text readable */
+h1, p, #artist-name, #result, #score, #timer {
+    color: white;
+}
+
+/* Other existing styles remain the same... */
+
 
 /* Splash Screen Styling */
 #splash-screen {
